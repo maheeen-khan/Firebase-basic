@@ -1,4 +1,7 @@
+#password ,#email{
+    border-radius: 14px;
+    border: none;
+}
 .reg-cont{
-    background-color: rgb(210, 137, 137);
     
 }
