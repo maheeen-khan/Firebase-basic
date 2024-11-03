@@ -1,6 +1,6 @@
 //import and do 3 things first (get button, function, addEventListener) , then copy paste code from firebase docs
 
-import { app, auth, createUserWithEmailAndPassword, onAuthStateChanged, } from './firebase.js'
+import { app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from './firebase.js'
 
 //validation check
 
@@ -47,7 +47,7 @@ function checkEmail() {
 }
 
 
-/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////Firebase Registeration
 let registerBtn = document.getElementById('register');
 
 let registerFunc = () => {
@@ -101,3 +101,42 @@ let gotoLogin = () => {
     reg.style.display = 'none'
     log.style.display = 'block'
 }
+
+//////////////////////////
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      
+      const uid = user.uid;
+      console.log("user exist", user);
+      
+    } else {
+      // User is signed out
+      console.log("user do not exist", user);
+    }
+  });
+
+//////////////////////////  Firebase signin ///////////////////////////////
+
+let loginBtn = document.getElementById('login');
+
+let loginFunc = () => {
+    let loginEmail = document.getElementById('login-email');
+    let loginPassword = document.getElementById('login-password');
+
+    signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("Login successfully")
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage)
+
+        });
+}
+
+loginBtn.addEventListener('click', loginFunc)
