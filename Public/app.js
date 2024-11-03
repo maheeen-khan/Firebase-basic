@@ -129,7 +129,29 @@ let loginFunc = () => {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            console.log("Login successfully")
+            // alert("Login successfully");
+            Swal.fire({
+                title: "Login Successfully!",
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__slower
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__slower
+                  `
+                }
+              });
+
+            setTimeout(()=>{
+                window.location.href = "./home.html"
+              },3000)
+
         })
         .catch((error) => {
             const errorCode = error.code;
