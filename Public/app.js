@@ -1,6 +1,6 @@
 //import and do 3 things first (get button, function, addEventListener) , then copy paste code from firebase docs
 
-import {app, auth, createUserWithEmailAndPassword,   onAuthStateChanged,} from './firebase.js'
+import { app, auth, createUserWithEmailAndPassword, onAuthStateChanged, } from './firebase.js'
 
 //validation check
 
@@ -50,7 +50,7 @@ function checkEmail() {
 /////////////////////////////////////////////////////
 let registerBtn = document.getElementById('register');
 
-let register = ()=>{
+let registerFunc = () => {
 
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -58,20 +58,46 @@ let register = ()=>{
     checkEmail()
 
     createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
-      // Signed up 
-      const user = userCredential.user;
-      
-      console.log("User register");
+        .then((userCredential) => {
+            // Signed up 
+            const user = userCredential.user;
 
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      
-      console.log("User registeration failed");
-      console.log(errorMessage)
-    });
+            console.log("User register");
+            gotoLogin()
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            console.log("User registeration failed");
+            console.log(errorMessage)
+        });
 }
 
-registerBtn.addEventListener('click', register);
+registerBtn.addEventListener('click', registerFunc);
+
+
+
+///////////////////////////////////////////////
+let SignUp = document.getElementById('gotoSignup')
+let gotoSignUp = () => {
+
+    let reg = document.getElementById('one');
+    let log = document.getElementById('two');
+
+    console.log('hi')
+
+    reg.style.display = 'block'
+    log.style.display = 'none'
+
+}
+SignUp.addEventListener('click', gotoSignUp)
+
+////////////////////////////////
+let gotoLogin = () => {
+    let reg = document.getElementById('one');
+    let log = document.getElementById('two');
+
+    reg.style.display = 'none'
+    log.style.display = 'block'
+}
