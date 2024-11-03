@@ -1,6 +1,6 @@
 //import and do 3 things first (get button, function, addEventListener) , then copy paste code from firebase docs
 
-import { app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from './firebase.js'
+import { app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword , signOut} from './firebase.js'
 
 //validation check
 
@@ -162,3 +162,43 @@ let loginFunc = () => {
 }
 
 loginBtn.addEventListener('click', loginFunc)
+
+
+///////////////////////////////////// firebase Log out
+let logout = document.getElementById('log-out')
+
+let logoutFunc = () =>{
+    signOut(auth).then(() => {
+
+        // Sign-out successful.
+
+        console.log("user logout successfully");
+        
+        //sweet alert
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Logout!",
+                text: "Your account has been logout.",
+                icon: "success"
+              });
+            }
+          });
+
+
+      }).catch((error) => {
+        // An error happened.
+        console.log("Can't Logout")
+      });
+      
+}
+
+logout.addEventListener('click', logoutFunc)
