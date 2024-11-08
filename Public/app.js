@@ -47,6 +47,22 @@ function checkEmail() {
 }
 
 
+//////////////////////////
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in
+    
+    const uid = user.uid;
+    console.log("user exist", user);
+    
+  } else {
+    // User is signed out
+    console.log("user do not exist", user);
+  }
+});
+
+
 /////////////////////////////////////////////////////Firebase Registeration
 let registerBtn = document.getElementById('register');
 
@@ -102,20 +118,7 @@ let gotoLogin = () => {
     log.style.display = 'block'
 }
 
-//////////////////////////
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in
-      
-      const uid = user.uid;
-      console.log("user exist", user);
-      
-    } else {
-      // User is signed out
-      console.log("user do not exist", user);
-    }
-  });
 
 //////////////////////////  Firebase signin ///////////////////////////////
 
@@ -165,7 +168,7 @@ loginBtn.addEventListener('click', loginFunc)
 
 
 ///////////////////////////////////// firebase Log out
-let logout = document.getElementById('log-out')
+let logout = document.getElementById('logout')
 
 let logoutFunc = () =>{
     signOut(auth).then(() => {
